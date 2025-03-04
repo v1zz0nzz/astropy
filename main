@@ -1,0 +1,37 @@
+# import numpy to work with mubers and lists of numbers easily
+import numpy as np
+
+#import pyplot from matplotlib to help us draw graphs and pictures.
+import matplotlib.pyplot as plt
+
+#import fits from astropy.io to open and use special space picture files called FITS
+from astropy.io import fits
+
+#import download_file from astropy.utils.data to grab data from the internet without leaving out code.
+from astropy.utils.data import download_file
+
+#import download_file from astro.utils.data to grab data from the internet without leaving our code.
+from astropy.visualization import LogStretch, PowerStretch
+
+#Import ImageNormalize from astropy.visualization to help make sure out pictures show up nicely in out graphs.
+from astropy.visualization.mpl_normalize import ImageNormalize
+
+import pprint #"pretty print" module
+
+#Use this function to download a space image stored in a FITS file
+image_file = download_file('https://chandra.harvard.edu/photo/2013/w49b/fits/w49b_0.5-8.0_flux.fits', cache=True)
+image_data = fits.getdata(image_file)
+header = fits.getheader(image_file)
+#pprint.pprint(header)
+plt.figure(figsize=(10,5))
+#plt.imshow(image_data, cmap='gray')
+#plt.imshow(image_data, cmap='twilight_shifted')
+plt.imshow(image_data, cmap='viridis')
+plt.colorbar()
+#plt.show()
+plt.show()
+#plt.show()
+print('Min:', np.min(image_data))
+print('Max:', np.max(image_data))
+print('Mean:', np.mean(image_data))
+print('stdev:', np.std(image_data))
